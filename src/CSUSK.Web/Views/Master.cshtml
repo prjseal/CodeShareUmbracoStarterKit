@@ -1,0 +1,71 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeShare Starter Kit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
+    <link rel="stylesheet" href="/css/Article-Clean.css">
+    <link rel="stylesheet" href="/css/Article-List.css">
+    <link rel="stylesheet" href="/css/Carousel-Hero.css">
+    <link rel="stylesheet" href="/css/Contact-Form-Clean.css">
+    <link rel="stylesheet" href="/css/Footer-Basic.css">
+    <link rel="stylesheet" href="/css/Navigation-Clean1.css">
+    <link rel="stylesheet" href="/css/News-Cards.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div>
+        <div style="margin-top:70px;"></div>
+            <nav class="navbar navbar-default navbar-fixed-top navigation-clean">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">CodeShare Starter Kit</a>
+                        <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navcol-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active" role="presentation"><a href="#">First Item</a></li>
+                            <li role="presentation"><a href="#">Second Item</a></li>
+                            <li role="presentation"><a href="#">Third Item</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li role="presentation"><a href="#">First Item</a></li>
+                                    <li role="presentation"><a href="#">Second Item</a></li>
+                                    <li role="presentation"><a href="#">Third Item</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            @RenderBody()
+        
+    </div>
+    
+    <div class="footer-basic">
+        <footer>
+            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+            <ul class="list-inline">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">Company Name © 2016</p>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
