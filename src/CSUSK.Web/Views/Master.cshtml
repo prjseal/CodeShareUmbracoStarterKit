@@ -21,32 +21,13 @@
     <link rel="stylesheet" href="/css/Navigation-Clean1.css">
     <link rel="stylesheet" href="/css/News-Cards.css">
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div style="margin-top:70px;"></div>
-    <nav class="navbar navbar-default navbar-fixed-top navigation-clean">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">CodeShare Starter Kit</a>
-                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-            </div>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active" role="presentation"><a href="#">First Item</a></li>
-                    <li role="presentation"><a href="#">Second Item</a></li>
-                    <li role="presentation"><a href="#">Third Item</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li role="presentation"><a href="#">First Item</a></li>
-                            <li role="presentation"><a href="#">Second Item</a></li>
-                            <li role="presentation"><a href="#">Third Item</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    @{ Html.RenderPartial("SiteLayout/_MainNavigation"); }
+
+    
     @RenderBody()
         
     @{ Html.RenderPartial("SiteLayout/_Footer"); }
