@@ -4,31 +4,30 @@
 
 @{ 
     IEnumerable<RelatedLink> footerSocialLinks = Umbraco.AssignedContentItem.GetPropertyValue<IEnumerable<RelatedLink>>("footerSocialLinks", true);
+    IEnumerable<RelatedLink> footerLinks = Umbraco.AssignedContentItem.GetPropertyValue<IEnumerable<RelatedLink>>("footerLinks", true);
 }
 
-<!-- Footer -->
-<section id="footer" class="wrapper split style2">
-    <div class="inner">
-        <section>
-            <header>
-                @Umbraco.Field("footerTitle", insertBefore: "<h3>", insertAfter: "</h3>", recursive: true)
-            </header>
-            @Umbraco.Field("footerContent", recursive: true)
-            @if (footerSocialLinks != null && footerSocialLinks.Count() > 0)
-            {
-                <ul class="icons">
-                    @foreach (RelatedLink link in footerSocialLinks)
-                    {
-                        <li><a href="@link.Link" class="icon fa-@link.Caption" target="@(link.NewWindow ? "_blank" : null)"><span class="label">@link.Caption</span></a></li>
-                    }
-                </ul>
-            }
-        </section>
-        <section>
-            @{ Html.RenderAction("RenderForm", "Contact"); }
-        </section>
-    </div>
-    <div class="copyright">
-        <p>&copy; Untitled. All rights reserved. Lorem ipsum dolor sit amet nullam.</p>
-    </div>
-</section>
+
+<div class="footer-basic">
+    <footer>
+        @if (footerSocialLinks != null && footerSocialLinks.Count() > 0)
+        {
+            <div class="social">
+                @foreach (RelatedLink link in footerSocialLinks)
+                {
+                    <a href="@link.Link"  target="@(link.NewWindow ? "_blank" : null)"><i class="icon fa fa-@link.Caption"></i></a>
+                }
+            </div>
+        }
+        @if (footerLinks != null && footerLinks.Count() > 0)
+        {
+            <ul class="list-inline">
+                @foreach (RelatedLink link in footerLinks)
+                {
+                    <li><a href="@link.Link" target="@(link.NewWindow ? "_blank" : null)">@link.Caption</a></li>
+                }
+            </ul>
+        }
+        <p class="copyright">Company Name &copy; @DateTime.Now.Year</p>
+    </footer>
+</div>
