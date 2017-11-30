@@ -1,0 +1,33 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "Master.cshtml";
+}
+
+@* the fun starts here *@
+
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "Master.cshtml";
+	string mainImageUrl = "";
+	if(Model.Content.HasValue("mainImage"))
+	{
+	    mainImageUrl = Model.Content.GetPropertyValue<IPublishedContent>("mainImage").Url;
+	}
+}
+
+<!-- Main -->
+<section id="main" class="wrapper style1">
+    <div class="inner">
+        <header class="major">
+            @*<h1>@Umbraco.Field("pageTitle", altFieldAlias:"pageName")</h1>*@
+            @Umbraco.Field("pageTitle", altFieldAlias:"pageName", insertBefore:"<h1>", insertAfter:"</h1>")
+            @Umbraco.Field("subtitle", insertBefore:"<p>", insertAfter:"</p>")
+        </header>
+        <span class="image main"><img src="@mainImageUrl" alt="" /></span>
+        <p><strong>@Umbraco.Field("articleDate",formatAsDate: true)</strong></p>
+        @Umbraco.Field("mainContent")
+
+        @{ Html.RenderPartial("Content/_ImageList"); }
+    </div>
+</section>
+

@@ -1,0 +1,44 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Master.cshtml";
+}
+
+<div class="contact-clean">
+
+    <form action="/search/" method="GET">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-8">
+                    <input type="text" class="form-control col-xs-6" placeholder="Search..." name="q">
+                </div>
+                <div class="col-xs-4">
+                    <button>Search</button>
+                </div>
+
+                <div class="col-xs-12">
+                    @{
+                        var searchQuery = Request.QueryString["q"];
+
+                        if (!string.IsNullOrEmpty(searchQuery))
+                        {
+                            <div class="searchresults">
+                                <p>Your search results for <strong>@searchQuery</strong></p>
+                                <ul>
+                                    @foreach (var result in Umbraco.Search(searchQuery))
+                                    {
+                                        <li>
+                                            <a href="@result.Url">@result.Name</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+
+</div>

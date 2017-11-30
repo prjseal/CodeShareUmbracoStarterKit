@@ -19,14 +19,14 @@ using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "7a14aac3db3e7cd7")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "a826c6bbc14dcbc6")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 namespace Umbraco.Web.PublishedContentModels
 {
 	/// <summary>Home</summary>
 	[PublishedContentModel("home")]
-	public partial class Home : PublishedContentModel
+	public partial class Home : PublishedContentModel, IFooterContentControls, IMetaDataControls, INavigationControls, IUmbracoUrlAliasControls
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "home";
@@ -48,11 +48,83 @@ namespace Umbraco.Web.PublishedContentModels
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 		}
+
+		///<summary>
+		/// Footer Links: Enter the footer links
+		///</summary>
+		[ImplementPropertyType("footerLinks")]
+		public Umbraco.Web.Models.RelatedLinks FooterLinks
+		{
+			get { return Umbraco.Web.PublishedContentModels.FooterContentControls.GetFooterLinks(this); }
+		}
+
+		///<summary>
+		/// Footer Social Links: Enter the social links to show in the footer
+		///</summary>
+		[ImplementPropertyType("footerSocialLinks")]
+		public Umbraco.Web.Models.RelatedLinks FooterSocialLinks
+		{
+			get { return Umbraco.Web.PublishedContentModels.FooterContentControls.GetFooterSocialLinks(this); }
+		}
+
+		///<summary>
+		/// Footer Title: Enter a title for the footer content
+		///</summary>
+		[ImplementPropertyType("footerTitle")]
+		public string FooterTitle
+		{
+			get { return Umbraco.Web.PublishedContentModels.FooterContentControls.GetFooterTitle(this); }
+		}
+
+		///<summary>
+		/// Meta Description: Enter the meta description. This is what shows up in Google etc. If left blank, will use the page name.
+		///</summary>
+		[ImplementPropertyType("metaDescription")]
+		public string MetaDescription
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaDescription(this); }
+		}
+
+		///<summary>
+		/// Meta Keywords: Enter the meta keywords. This is used for Search Engine
+		///</summary>
+		[ImplementPropertyType("metaKeywords")]
+		public IEnumerable<string> MetaKeywords
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaKeywords(this); }
+		}
+
+		///<summary>
+		/// Meta Name: Enter the meta name. If left blank it will use the page name.
+		///</summary>
+		[ImplementPropertyType("metaName")]
+		public string MetaName
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaName(this); }
+		}
+
+		///<summary>
+		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
+		///</summary>
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetUmbracoNaviHide(this); }
+		}
+
+		///<summary>
+		/// Umbraco Url Alias: Enter an alternate url in here. Please note that the values you use must be lowercase, not use a leading slash and not use a trailing ".aspx" or trailing slash. If you are adding multiple values, they must be separated with a comma.
+		///</summary>
+		[ImplementPropertyType("umbracoUrlAlias")]
+		public string UmbracoUrlAlias
+		{
+			get { return Umbraco.Web.PublishedContentModels.UmbracoUrlAliasControls.GetUmbracoUrlAlias(this); }
+		}
 	}
 
 	/// <summary>Content</summary>
 	[PublishedContentModel("content")]
-	public partial class Content : PublishedContentModel
+	public partial class Content : PublishedContentModel, IContentControls, IMetaDataControls, INavigationControls, IUmbracoUrlAliasControls
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "content";
@@ -74,11 +146,83 @@ namespace Umbraco.Web.PublishedContentModels
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 		}
+
+		///<summary>
+		/// Content Grid: Enter the content for the grid
+		///</summary>
+		[ImplementPropertyType("contentGrid")]
+		public Newtonsoft.Json.Linq.JToken ContentGrid
+		{
+			get { return Umbraco.Web.PublishedContentModels.ContentControls.GetContentGrid(this); }
+		}
+
+		///<summary>
+		/// Main Image: Choose an image to show as the main image on this page
+		///</summary>
+		[ImplementPropertyType("mainImage")]
+		public IPublishedContent MainImage
+		{
+			get { return Umbraco.Web.PublishedContentModels.ContentControls.GetMainImage(this); }
+		}
+
+		///<summary>
+		/// Title: Enter the title for this page. If you leave this blank, we will use the page name.
+		///</summary>
+		[ImplementPropertyType("title")]
+		public string Title
+		{
+			get { return Umbraco.Web.PublishedContentModels.ContentControls.GetTitle(this); }
+		}
+
+		///<summary>
+		/// Meta Description: Enter the meta description. This is what shows up in Google etc. If left blank, will use the page name.
+		///</summary>
+		[ImplementPropertyType("metaDescription")]
+		public string MetaDescription
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaDescription(this); }
+		}
+
+		///<summary>
+		/// Meta Keywords: Enter the meta keywords. This is used for Search Engine
+		///</summary>
+		[ImplementPropertyType("metaKeywords")]
+		public IEnumerable<string> MetaKeywords
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaKeywords(this); }
+		}
+
+		///<summary>
+		/// Meta Name: Enter the meta name. If left blank it will use the page name.
+		///</summary>
+		[ImplementPropertyType("metaName")]
+		public string MetaName
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaName(this); }
+		}
+
+		///<summary>
+		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
+		///</summary>
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetUmbracoNaviHide(this); }
+		}
+
+		///<summary>
+		/// Umbraco Url Alias: Enter an alternate url in here. Please note that the values you use must be lowercase, not use a leading slash and not use a trailing ".aspx" or trailing slash. If you are adding multiple values, they must be separated with a comma.
+		///</summary>
+		[ImplementPropertyType("umbracoUrlAlias")]
+		public string UmbracoUrlAlias
+		{
+			get { return Umbraco.Web.PublishedContentModels.UmbracoUrlAliasControls.GetUmbracoUrlAlias(this); }
+		}
 	}
 
 	/// <summary>Contact</summary>
 	[PublishedContentModel("contact")]
-	public partial class Contact : PublishedContentModel
+	public partial class Contact : PublishedContentModel, IMetaDataControls, INavigationControls, IUmbracoUrlAliasControls
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "contact";
@@ -100,6 +244,701 @@ namespace Umbraco.Web.PublishedContentModels
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 		}
+
+		///<summary>
+		/// Meta Description: Enter the meta description. This is what shows up in Google etc. If left blank, will use the page name.
+		///</summary>
+		[ImplementPropertyType("metaDescription")]
+		public string MetaDescription
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaDescription(this); }
+		}
+
+		///<summary>
+		/// Meta Keywords: Enter the meta keywords. This is used for Search Engine
+		///</summary>
+		[ImplementPropertyType("metaKeywords")]
+		public IEnumerable<string> MetaKeywords
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaKeywords(this); }
+		}
+
+		///<summary>
+		/// Meta Name: Enter the meta name. If left blank it will use the page name.
+		///</summary>
+		[ImplementPropertyType("metaName")]
+		public string MetaName
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaName(this); }
+		}
+
+		///<summary>
+		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
+		///</summary>
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetUmbracoNaviHide(this); }
+		}
+
+		///<summary>
+		/// Umbraco Url Alias: Enter an alternate url in here. Please note that the values you use must be lowercase, not use a leading slash and not use a trailing ".aspx" or trailing slash. If you are adding multiple values, they must be separated with a comma.
+		///</summary>
+		[ImplementPropertyType("umbracoUrlAlias")]
+		public string UmbracoUrlAlias
+		{
+			get { return Umbraco.Web.PublishedContentModels.UmbracoUrlAliasControls.GetUmbracoUrlAlias(this); }
+		}
+	}
+
+	// Mixin content Type 1073 with alias "umbracoUrlAliasControls"
+	/// <summary>Umbraco Url Alias Controls</summary>
+	public partial interface IUmbracoUrlAliasControls : IPublishedContent
+	{
+		/// <summary>Umbraco Url Alias</summary>
+		string UmbracoUrlAlias { get; }
+	}
+
+	/// <summary>Umbraco Url Alias Controls</summary>
+	[PublishedContentModel("umbracoUrlAliasControls")]
+	public partial class UmbracoUrlAliasControls : PublishedContentModel, IUmbracoUrlAliasControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "umbracoUrlAliasControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public UmbracoUrlAliasControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<UmbracoUrlAliasControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Umbraco Url Alias: Enter an alternate url in here. Please note that the values you use must be lowercase, not use a leading slash and not use a trailing ".aspx" or trailing slash. If you are adding multiple values, they must be separated with a comma.
+		///</summary>
+		[ImplementPropertyType("umbracoUrlAlias")]
+		public string UmbracoUrlAlias
+		{
+			get { return GetUmbracoUrlAlias(this); }
+		}
+
+		/// <summary>Static getter for Umbraco Url Alias</summary>
+		public static string GetUmbracoUrlAlias(IUmbracoUrlAliasControls that) { return that.GetPropertyValue<string>("umbracoUrlAlias"); }
+	}
+
+	// Mixin content Type 1074 with alias "prettyLinkControls"
+	/// <summary>Pretty Link Controls</summary>
+	public partial interface IPrettyLinkControls : IPublishedContent
+	{
+		/// <summary>Link Target</summary>
+		Umbraco.Web.Models.RelatedLinks LinkTarget { get; }
+	}
+
+	/// <summary>Pretty Link Controls</summary>
+	[PublishedContentModel("prettyLinkControls")]
+	public partial class PrettyLinkControls : PublishedContentModel, IPrettyLinkControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "prettyLinkControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public PrettyLinkControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<PrettyLinkControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Link Target: Enter the link for this pretty link to point to
+		///</summary>
+		[ImplementPropertyType("linkTarget")]
+		public Umbraco.Web.Models.RelatedLinks LinkTarget
+		{
+			get { return GetLinkTarget(this); }
+		}
+
+		/// <summary>Static getter for Link Target</summary>
+		public static Umbraco.Web.Models.RelatedLinks GetLinkTarget(IPrettyLinkControls that) { return that.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("linkTarget"); }
+	}
+
+	// Mixin content Type 1075 with alias "metaDataControls"
+	/// <summary>Meta Data Controls</summary>
+	public partial interface IMetaDataControls : IPublishedContent
+	{
+		/// <summary>Meta Description</summary>
+		string MetaDescription { get; }
+
+		/// <summary>Meta Keywords</summary>
+		IEnumerable<string> MetaKeywords { get; }
+
+		/// <summary>Meta Name</summary>
+		string MetaName { get; }
+	}
+
+	/// <summary>Meta Data Controls</summary>
+	[PublishedContentModel("metaDataControls")]
+	public partial class MetaDataControls : PublishedContentModel, IMetaDataControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "metaDataControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public MetaDataControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<MetaDataControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Meta Description: Enter the meta description. This is what shows up in Google etc. If left blank, will use the page name.
+		///</summary>
+		[ImplementPropertyType("metaDescription")]
+		public string MetaDescription
+		{
+			get { return GetMetaDescription(this); }
+		}
+
+		/// <summary>Static getter for Meta Description</summary>
+		public static string GetMetaDescription(IMetaDataControls that) { return that.GetPropertyValue<string>("metaDescription"); }
+
+		///<summary>
+		/// Meta Keywords: Enter the meta keywords. This is used for Search Engine
+		///</summary>
+		[ImplementPropertyType("metaKeywords")]
+		public IEnumerable<string> MetaKeywords
+		{
+			get { return GetMetaKeywords(this); }
+		}
+
+		/// <summary>Static getter for Meta Keywords</summary>
+		public static IEnumerable<string> GetMetaKeywords(IMetaDataControls that) { return that.GetPropertyValue<IEnumerable<string>>("metaKeywords"); }
+
+		///<summary>
+		/// Meta Name: Enter the meta name. If left blank it will use the page name.
+		///</summary>
+		[ImplementPropertyType("metaName")]
+		public string MetaName
+		{
+			get { return GetMetaName(this); }
+		}
+
+		/// <summary>Static getter for Meta Name</summary>
+		public static string GetMetaName(IMetaDataControls that) { return that.GetPropertyValue<string>("metaName"); }
+	}
+
+	// Mixin content Type 1076 with alias "navigationControls"
+	/// <summary>Navigation Controls</summary>
+	public partial interface INavigationControls : IPublishedContent
+	{
+		/// <summary>Umbraco Navi Hide</summary>
+		bool UmbracoNaviHide { get; }
+	}
+
+	/// <summary>Navigation Controls</summary>
+	[PublishedContentModel("navigationControls")]
+	public partial class NavigationControls : PublishedContentModel, INavigationControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "navigationControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public NavigationControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<NavigationControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
+		///</summary>
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide
+		{
+			get { return GetUmbracoNaviHide(this); }
+		}
+
+		/// <summary>Static getter for Umbraco Navi Hide</summary>
+		public static bool GetUmbracoNaviHide(INavigationControls that) { return that.GetPropertyValue<bool>("umbracoNaviHide"); }
+	}
+
+	// Mixin content Type 1077 with alias "footerContentControls"
+	/// <summary>Footer Content Controls</summary>
+	public partial interface IFooterContentControls : IPublishedContent
+	{
+		/// <summary>Footer Links</summary>
+		Umbraco.Web.Models.RelatedLinks FooterLinks { get; }
+
+		/// <summary>Footer Social Links</summary>
+		Umbraco.Web.Models.RelatedLinks FooterSocialLinks { get; }
+
+		/// <summary>Footer Title</summary>
+		string FooterTitle { get; }
+	}
+
+	/// <summary>Footer Content Controls</summary>
+	[PublishedContentModel("footerContentControls")]
+	public partial class FooterContentControls : PublishedContentModel, IFooterContentControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "footerContentControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public FooterContentControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<FooterContentControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Footer Links: Enter the footer links
+		///</summary>
+		[ImplementPropertyType("footerLinks")]
+		public Umbraco.Web.Models.RelatedLinks FooterLinks
+		{
+			get { return GetFooterLinks(this); }
+		}
+
+		/// <summary>Static getter for Footer Links</summary>
+		public static Umbraco.Web.Models.RelatedLinks GetFooterLinks(IFooterContentControls that) { return that.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("footerLinks"); }
+
+		///<summary>
+		/// Footer Social Links: Enter the social links to show in the footer
+		///</summary>
+		[ImplementPropertyType("footerSocialLinks")]
+		public Umbraco.Web.Models.RelatedLinks FooterSocialLinks
+		{
+			get { return GetFooterSocialLinks(this); }
+		}
+
+		/// <summary>Static getter for Footer Social Links</summary>
+		public static Umbraco.Web.Models.RelatedLinks GetFooterSocialLinks(IFooterContentControls that) { return that.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("footerSocialLinks"); }
+
+		///<summary>
+		/// Footer Title: Enter a title for the footer content
+		///</summary>
+		[ImplementPropertyType("footerTitle")]
+		public string FooterTitle
+		{
+			get { return GetFooterTitle(this); }
+		}
+
+		/// <summary>Static getter for Footer Title</summary>
+		public static string GetFooterTitle(IFooterContentControls that) { return that.GetPropertyValue<string>("footerTitle"); }
+	}
+
+	/// <summary>Article List</summary>
+	[PublishedContentModel("articleList")]
+	public partial class ArticleList : PublishedContentModel, IMetaDataControls, INavigationControls, IUmbracoUrlAliasControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "articleList";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public ArticleList(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ArticleList, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Meta Description: Enter the meta description. This is what shows up in Google etc. If left blank, will use the page name.
+		///</summary>
+		[ImplementPropertyType("metaDescription")]
+		public string MetaDescription
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaDescription(this); }
+		}
+
+		///<summary>
+		/// Meta Keywords: Enter the meta keywords. This is used for Search Engine
+		///</summary>
+		[ImplementPropertyType("metaKeywords")]
+		public IEnumerable<string> MetaKeywords
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaKeywords(this); }
+		}
+
+		///<summary>
+		/// Meta Name: Enter the meta name. If left blank it will use the page name.
+		///</summary>
+		[ImplementPropertyType("metaName")]
+		public string MetaName
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaName(this); }
+		}
+
+		///<summary>
+		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
+		///</summary>
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetUmbracoNaviHide(this); }
+		}
+
+		///<summary>
+		/// Umbraco Url Alias: Enter an alternate url in here. Please note that the values you use must be lowercase, not use a leading slash and not use a trailing ".aspx" or trailing slash. If you are adding multiple values, they must be separated with a comma.
+		///</summary>
+		[ImplementPropertyType("umbracoUrlAlias")]
+		public string UmbracoUrlAlias
+		{
+			get { return Umbraco.Web.PublishedContentModels.UmbracoUrlAliasControls.GetUmbracoUrlAlias(this); }
+		}
+	}
+
+	/// <summary>Article</summary>
+	[PublishedContentModel("article")]
+	public partial class Article : PublishedContentModel, IContentControls, IMetaDataControls, INavigationControls, IUmbracoUrlAliasControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "article";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public Article(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Article, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Content Grid: Enter the content for the grid
+		///</summary>
+		[ImplementPropertyType("contentGrid")]
+		public Newtonsoft.Json.Linq.JToken ContentGrid
+		{
+			get { return Umbraco.Web.PublishedContentModels.ContentControls.GetContentGrid(this); }
+		}
+
+		///<summary>
+		/// Main Image: Choose an image to show as the main image on this page
+		///</summary>
+		[ImplementPropertyType("mainImage")]
+		public IPublishedContent MainImage
+		{
+			get { return Umbraco.Web.PublishedContentModels.ContentControls.GetMainImage(this); }
+		}
+
+		///<summary>
+		/// Title: Enter the title for this page. If you leave this blank, we will use the page name.
+		///</summary>
+		[ImplementPropertyType("title")]
+		public string Title
+		{
+			get { return Umbraco.Web.PublishedContentModels.ContentControls.GetTitle(this); }
+		}
+
+		///<summary>
+		/// Meta Description: Enter the meta description. This is what shows up in Google etc. If left blank, will use the page name.
+		///</summary>
+		[ImplementPropertyType("metaDescription")]
+		public string MetaDescription
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaDescription(this); }
+		}
+
+		///<summary>
+		/// Meta Keywords: Enter the meta keywords. This is used for Search Engine
+		///</summary>
+		[ImplementPropertyType("metaKeywords")]
+		public IEnumerable<string> MetaKeywords
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaKeywords(this); }
+		}
+
+		///<summary>
+		/// Meta Name: Enter the meta name. If left blank it will use the page name.
+		///</summary>
+		[ImplementPropertyType("metaName")]
+		public string MetaName
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaName(this); }
+		}
+
+		///<summary>
+		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
+		///</summary>
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetUmbracoNaviHide(this); }
+		}
+
+		///<summary>
+		/// Umbraco Url Alias: Enter an alternate url in here. Please note that the values you use must be lowercase, not use a leading slash and not use a trailing ".aspx" or trailing slash. If you are adding multiple values, they must be separated with a comma.
+		///</summary>
+		[ImplementPropertyType("umbracoUrlAlias")]
+		public string UmbracoUrlAlias
+		{
+			get { return Umbraco.Web.PublishedContentModels.UmbracoUrlAliasControls.GetUmbracoUrlAlias(this); }
+		}
+	}
+
+	/// <summary>Pretty Link</summary>
+	[PublishedContentModel("prettyLink")]
+	public partial class PrettyLink : PublishedContentModel, INavigationControls, IPrettyLinkControls, IUmbracoUrlAliasControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "prettyLink";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public PrettyLink(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<PrettyLink, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
+		///</summary>
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetUmbracoNaviHide(this); }
+		}
+
+		///<summary>
+		/// Link Target: Enter the link for this pretty link to point to
+		///</summary>
+		[ImplementPropertyType("linkTarget")]
+		public Umbraco.Web.Models.RelatedLinks LinkTarget
+		{
+			get { return Umbraco.Web.PublishedContentModels.PrettyLinkControls.GetLinkTarget(this); }
+		}
+
+		///<summary>
+		/// Umbraco Url Alias: Enter an alternate url in here. Please note that the values you use must be lowercase, not use a leading slash and not use a trailing ".aspx" or trailing slash. If you are adding multiple values, they must be separated with a comma.
+		///</summary>
+		[ImplementPropertyType("umbracoUrlAlias")]
+		public string UmbracoUrlAlias
+		{
+			get { return Umbraco.Web.PublishedContentModels.UmbracoUrlAliasControls.GetUmbracoUrlAlias(this); }
+		}
+	}
+
+	/// <summary>Search</summary>
+	[PublishedContentModel("search")]
+	public partial class Search : PublishedContentModel, IMetaDataControls, INavigationControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "search";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public Search(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Search, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Meta Description: Enter the meta description. This is what shows up in Google etc. If left blank, will use the page name.
+		///</summary>
+		[ImplementPropertyType("metaDescription")]
+		public string MetaDescription
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaDescription(this); }
+		}
+
+		///<summary>
+		/// Meta Keywords: Enter the meta keywords. This is used for Search Engine
+		///</summary>
+		[ImplementPropertyType("metaKeywords")]
+		public IEnumerable<string> MetaKeywords
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaKeywords(this); }
+		}
+
+		///<summary>
+		/// Meta Name: Enter the meta name. If left blank it will use the page name.
+		///</summary>
+		[ImplementPropertyType("metaName")]
+		public string MetaName
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaName(this); }
+		}
+
+		///<summary>
+		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
+		///</summary>
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetUmbracoNaviHide(this); }
+		}
+	}
+
+	// Mixin content Type 1087 with alias "contentControls"
+	/// <summary>Content Controls</summary>
+	public partial interface IContentControls : IPublishedContent
+	{
+		/// <summary>Content Grid</summary>
+		Newtonsoft.Json.Linq.JToken ContentGrid { get; }
+
+		/// <summary>Main Image</summary>
+		IPublishedContent MainImage { get; }
+
+		/// <summary>Title</summary>
+		string Title { get; }
+	}
+
+	/// <summary>Content Controls</summary>
+	[PublishedContentModel("contentControls")]
+	public partial class ContentControls : PublishedContentModel, IContentControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "contentControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public ContentControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ContentControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Content Grid: Enter the content for the grid
+		///</summary>
+		[ImplementPropertyType("contentGrid")]
+		public Newtonsoft.Json.Linq.JToken ContentGrid
+		{
+			get { return GetContentGrid(this); }
+		}
+
+		/// <summary>Static getter for Content Grid</summary>
+		public static Newtonsoft.Json.Linq.JToken GetContentGrid(IContentControls that) { return that.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("contentGrid"); }
+
+		///<summary>
+		/// Main Image: Choose an image to show as the main image on this page
+		///</summary>
+		[ImplementPropertyType("mainImage")]
+		public IPublishedContent MainImage
+		{
+			get { return GetMainImage(this); }
+		}
+
+		/// <summary>Static getter for Main Image</summary>
+		public static IPublishedContent GetMainImage(IContentControls that) { return that.GetPropertyValue<IPublishedContent>("mainImage"); }
+
+		///<summary>
+		/// Title: Enter the title for this page. If you leave this blank, we will use the page name.
+		///</summary>
+		[ImplementPropertyType("title")]
+		public string Title
+		{
+			get { return GetTitle(this); }
+		}
+
+		/// <summary>Static getter for Title</summary>
+		public static string GetTitle(IContentControls that) { return that.GetPropertyValue<string>("title"); }
 	}
 
 	/// <summary>Folder</summary>
