@@ -1,0 +1,34 @@
+﻿@inherits UmbracoViewPage
+
+@using Umbraco.Web.Models
+
+@{ 
+    IEnumerable<RelatedLink> footerSocialLinks = Umbraco.AssignedContentItem.GetPropertyValue<IEnumerable<RelatedLink>>("footerSocialLinks", true);
+}
+
+<!-- Footer -->
+<section id="footer" class="wrapper split style2">
+    <div class="inner">
+        <section>
+            <header>
+                @Umbraco.Field("footerTitle", insertBefore: "<h3>", insertAfter: "</h3>", recursive: true)
+            </header>
+            @Umbraco.Field("footerContent", recursive: true)
+            @if (footerSocialLinks != null && footerSocialLinks.Count() > 0)
+            {
+                <ul class="icons">
+                    @foreach (RelatedLink link in footerSocialLinks)
+                    {
+                        <li><a href="@link.Link" class="icon fa-@link.Caption" target="@(link.NewWindow ? "_blank" : null)"><span class="label">@link.Caption</span></a></li>
+                    }
+                </ul>
+            }
+        </section>
+        <section>
+            @{ Html.RenderAction("RenderForm", "Contact"); }
+        </section>
+    </div>
+    <div class="copyright">
+        <p>&copy; Untitled. All rights reserved. Lorem ipsum dolor sit amet nullam.</p>
+    </div>
+</section>

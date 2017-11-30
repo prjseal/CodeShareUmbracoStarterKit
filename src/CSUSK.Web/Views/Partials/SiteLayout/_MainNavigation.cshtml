@@ -1,0 +1,56 @@
+﻿@inherits UmbracoViewPage
+
+@using Umbraco.Web.Models
+
+@{ 
+    IPublishedContent homePage = Umbraco.AssignedContentItem.AncestorOrSelf("home");
+    IEnumerable<IPublishedContent> navigationPages = homePage.Children(x => x.IsVisible());
+}
+
+
+<!-- Header -->
+<header id="header">
+    <nav>
+        <ul>
+            <li><a href="#menu">Menu</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+    <h2>Menu</h2>
+    <ul class="links">
+        <li><a href="/">Home</a></li>
+        @if (navigationPages != null && navigationPages.Count() > 0)
+        {
+            foreach (IPublishedContent page in navigationPages)
+            {
+                if (page.DocumentTypeAlias == "prettyLink")
+                {
+                    RelatedLinks relatedLinks = page.GetPropertyValue<RelatedLinks>("linkTarget");
+                    RelatedLink prettyLink = null;
+                    if (relatedLinks != null && relatedLinks.Count() > 0)
+                    {
+                        prettyLink = relatedLinks.FirstOrDefault();
+                    }
+
+                    if (prettyLink != null)
+                    {
+                        <li><a href="@prettyLink.Link" target="@(prettyLink.NewWindow ? "_blank" : null)">@prettyLink.Caption</a></li>
+                    }
+                }
+                else
+                {
+                    <li><a href="@page.Url">@page.Name</a></li>
+                }
+            }
+        }
+    </ul>
+
+
+    <ul class="actions vertical">
+        <li><a href="#footer" class="button fit special">Contact</a></li>
+        @*<li><a href="#" class="button fit">Log In</a></li>*@
+    </ul>
+</nav>
