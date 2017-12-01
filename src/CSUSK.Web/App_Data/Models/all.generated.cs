@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "a826c6bbc14dcbc6")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "f751d1e47a9d13cd")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.5")]
 
 
 // FILE: models.generated.cs
@@ -120,6 +120,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Disable Dropdown: Tick this box if you want to disable the dropdown for this item
+		///</summary>
+		[ImplementPropertyType("disableDropdown")]
+		public bool DisableDropdown
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetDisableDropdown(this); }
+		}
+
+		///<summary>
 		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
 		///</summary>
 		[ImplementPropertyType("umbracoNaviHide")]
@@ -218,6 +227,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Disable Dropdown: Tick this box if you want to disable the dropdown for this item
+		///</summary>
+		[ImplementPropertyType("disableDropdown")]
+		public bool DisableDropdown
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetDisableDropdown(this); }
+		}
+
+		///<summary>
 		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
 		///</summary>
 		[ImplementPropertyType("umbracoNaviHide")]
@@ -286,6 +304,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public string MetaName
 		{
 			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaName(this); }
+		}
+
+		///<summary>
+		/// Disable Dropdown: Tick this box if you want to disable the dropdown for this item
+		///</summary>
+		[ImplementPropertyType("disableDropdown")]
+		public bool DisableDropdown
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetDisableDropdown(this); }
 		}
 
 		///<summary>
@@ -479,6 +506,9 @@ namespace Umbraco.Web.PublishedContentModels
 	/// <summary>Navigation Controls</summary>
 	public partial interface INavigationControls : IPublishedContent
 	{
+		/// <summary>Disable Dropdown</summary>
+		bool DisableDropdown { get; }
+
 		/// <summary>Umbraco Navi Hide</summary>
 		bool UmbracoNaviHide { get; }
 	}
@@ -507,6 +537,18 @@ namespace Umbraco.Web.PublishedContentModels
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 		}
+
+		///<summary>
+		/// Disable Dropdown: Tick this box if you want to disable the dropdown for this item
+		///</summary>
+		[ImplementPropertyType("disableDropdown")]
+		public bool DisableDropdown
+		{
+			get { return GetDisableDropdown(this); }
+		}
+
+		/// <summary>Static getter for Disable Dropdown</summary>
+		public static bool GetDisableDropdown(INavigationControls that) { return that.GetPropertyValue<bool>("disableDropdown"); }
 
 		///<summary>
 		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
@@ -650,6 +692,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Disable Dropdown: Tick this box if you want to disable the dropdown for this item
+		///</summary>
+		[ImplementPropertyType("disableDropdown")]
+		public bool DisableDropdown
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetDisableDropdown(this); }
+		}
+
+		///<summary>
 		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
 		///</summary>
 		[ImplementPropertyType("umbracoNaviHide")]
@@ -748,6 +799,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Disable Dropdown: Tick this box if you want to disable the dropdown for this item
+		///</summary>
+		[ImplementPropertyType("disableDropdown")]
+		public bool DisableDropdown
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetDisableDropdown(this); }
+		}
+
+		///<summary>
 		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
 		///</summary>
 		[ImplementPropertyType("umbracoNaviHide")]
@@ -789,6 +849,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<PrettyLink, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Disable Dropdown: Tick this box if you want to disable the dropdown for this item
+		///</summary>
+		[ImplementPropertyType("disableDropdown")]
+		public bool DisableDropdown
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetDisableDropdown(this); }
 		}
 
 		///<summary>
@@ -869,6 +938,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public string MetaName
 		{
 			get { return Umbraco.Web.PublishedContentModels.MetaDataControls.GetMetaName(this); }
+		}
+
+		///<summary>
+		/// Disable Dropdown: Tick this box if you want to disable the dropdown for this item
+		///</summary>
+		[ImplementPropertyType("disableDropdown")]
+		public bool DisableDropdown
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetDisableDropdown(this); }
 		}
 
 		///<summary>

@@ -17,39 +17,74 @@
             @if (navigationPages != null && navigationPages.Count() > 0)
             {
                 <ul class="nav navbar-nav navbar-right">
-                @foreach (IPublishedContent page in navigationPages)
-                {
-                    if (page.DocumentTypeAlias == "prettyLink")
-                    {
-                        RelatedLinks relatedLinks = page.GetPropertyValue<RelatedLinks>("linkTarget");
-                        RelatedLink prettyLink = null;
-                        if (relatedLinks != null && relatedLinks.Count() > 0)
-                        {
-                            prettyLink = relatedLinks.FirstOrDefault();
-                        }
-
-                        if (prettyLink != null)
-                        {
-                            <li role="presentation"><a href="@prettyLink.Link" target="@(prettyLink.NewWindow ? "_blank" : null)">@prettyLink.Caption</a></li>
-                        }
-                    }
-                    else
-                    {
-                        <li role="presentation"><a href="@page.Url">@page.Name</a></li>
-                    }
-                }
-                    
-                    @*<li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li role="presentation"><a href="#">First Item</a></li>
-                            <li role="presentation"><a href="#">Second Item</a></li>
-                            <li role="presentation"><a href="#">Third Item</a></li>
-                        </ul>
-                    </li>*@
+                    @RenderChildren(navigationPages)
                 </ul>
 
             }
         </div>
     </div>
 </nav>
+
+@helper RenderChildren(IEnumerable<IPublishedContent> navigationPages)
+{
+    foreach (IPublishedContent item in navigationPages)
+    {
+        if (item.DocumentTypeAlias == "prettyLink")
+        {
+            @RenderPrettyLink(item)
+        }
+        else
+        {
+            @RenderPageLink(item)
+        }
+    }
+}
+
+@helper RenderPrettyLink(IPublishedContent item)
+{
+    RelatedLinks relatedLinks = item.GetPropertyValue<RelatedLinks>("linkTarget");
+    RelatedLink prettyLink = null;
+    if (relatedLinks != null && relatedLinks.Count() > 0)
+    {
+        prettyLink = relatedLinks.FirstOrDefault();
+    }
+
+    if (prettyLink != null)
+    {
+        if (!item.GetPropertyValue<bool>("disableDropdown") && item.Children != null && item.Children.Where(x => x.IsVisible()).Any())
+        {
+            IEnumerable<IPublishedContent> childItems = item.Children.Where(x => x.IsVisible());
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="@prettyLink.Link">@prettyLink.Caption <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    @RenderChildren(childItems)
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li role="presentation"><a href="@prettyLink.Link" target="@(prettyLink.NewWindow ? "_blank" : null)">@prettyLink.Caption</a></li>
+        }
+        
+    }
+}
+
+@helper RenderPageLink(IPublishedContent item)
+{
+    if (!item.GetPropertyValue<bool>("disableDropdown") && item.Children != null && item.Children.Where(x => x.IsVisible()).Any())
+    {
+        IEnumerable<IPublishedContent> childItems = item.Children.Where(x => x.IsVisible());
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="@item.Url">@item.Name <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                @RenderChildren(childItems)
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li role="presentation">
+            <a href="@item.Url">@item.Name</a>
+        </li>
+    }
+}
