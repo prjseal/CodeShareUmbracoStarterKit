@@ -1,0 +1,46 @@
+﻿@inherits UmbracoViewPage
+
+@using Umbraco.Web.Models
+
+@{ 
+    string carouselId = "mainCarousel";
+    IEnumerable<IPublishedContent> carousel = Umbraco.AssignedContentItem.GetPropertyValue<IEnumerable<IPublishedContent>>(carouselId);
+}
+
+@if (carousel != null && carousel.Any())
+{
+    <div class="carousel slide" data-ride="carousel" id="@carouselId">
+        <div class="carousel-inner" role="listbox">
+            @{
+                int slideCount = 0;
+                foreach (IPublishedContent slide in carousel)
+                {
+                    string title = slide.GetPropertyValue<string>("slideTitle");
+                    string subtitle = slide.HasValue("slideSubtitle") ? slide.GetPropertyValue<string>("slideSubtitle") : "";
+                    string imageUrl = slide.HasValue("slideImage") ? slide.GetPropertyValue<IPublishedContent>("slideImage").Url : "/img/carousel.jpg";
+                    IEnumerable<RelatedLink> links = slide.GetPropertyValue<IEnumerable<RelatedLink>>("slideLink");
+                    RelatedLink link = links != null ? links.FirstOrDefault() : null;
+
+                    <div class="item @(slideCount == 0 ? "active" : "")">
+                        <div class="jumbotron carousel-hero" style="background-image:url('@(imageUrl)');">
+                            <h1 class="hero-title">@title</h1>
+                            <p class="hero-subtitle">@subtitle</p>
+                            <p><a class="btn btn-primary btn-lg hero-button" role="button" target="@(link.NewWindow ? "_blank" : null)" href="@link.Link">@link.Caption</a></p>
+                        </div>
+                    </div>
+                    slideCount++;
+                }
+            }
+        </div>
+        <div>
+            <a class="left carousel-control" href="#@carouselId" role="button" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i><span class="sr-only">Previous</span></a>
+            <a class="right carousel-control" href="#@carouselId" role="button" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i><span class="sr-only">Next</span></a>
+        </div>
+        <ol class="carousel-indicators">
+            @for(int i = 0; i < slideCount; i++)
+            {
+                <li data-target="#@carouselId" data-slide-to="@i" class="@(i == 0 ? "active" : null)"></li>
+            }
+        </ol>
+    </div>
+}

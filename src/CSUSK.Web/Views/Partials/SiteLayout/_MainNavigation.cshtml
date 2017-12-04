@@ -54,8 +54,9 @@
         if (!item.GetPropertyValue<bool>("disableDropdown") && item.Children != null && item.Children.Where(x => x.IsVisible()).Any())
         {
             IEnumerable<IPublishedContent> childItems = item.Children.Where(x => x.IsVisible());
+            bool textOnly = item.GetPropertyValue<bool>("textOnlyInNavigation");
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="@prettyLink.Link">@prettyLink.Caption <span class="caret"></span></a>
+                <a class="dropdown-toggle @(textOnly ? "textonly" : null)" data-toggle="dropdown" aria-expanded="false" href="@prettyLink.Link">@prettyLink.Caption <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     @RenderChildren(childItems)
                 </ul>
@@ -74,8 +75,9 @@
     if (!item.GetPropertyValue<bool>("disableDropdown") && item.Children != null && item.Children.Where(x => x.IsVisible()).Any())
     {
         IEnumerable<IPublishedContent> childItems = item.Children.Where(x => x.IsVisible());
+        bool textOnly = item.GetPropertyValue<bool>("textOnlyInNavigation");
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="@item.Url">@item.Name <span class="caret"></span></a>
+            <a class="dropdown-toggle @(textOnly ? "textonly" : null)" data-toggle="dropdown" aria-expanded="false" href="@item.Url">@item.Name <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
                 @RenderChildren(childItems)
             </ul>

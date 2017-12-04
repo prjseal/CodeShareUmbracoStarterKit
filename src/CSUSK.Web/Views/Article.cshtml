@@ -1,13 +1,6 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
 	Layout = "Master.cshtml";
-}
-
-@* the fun starts here *@
-
-@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-@{
-	Layout = "Master.cshtml";
 	string mainImageUrl = "";
 	if(Model.Content.HasValue("mainImage"))
 	{
@@ -15,17 +8,21 @@
 	}
 }
 
-<!-- Main -->
-<section id="main" class="wrapper style1">
-    <div class="inner">
-        <header class="major">
-            @*<h1>@Umbraco.Field("pageTitle", altFieldAlias:"pageName")</h1>*@
-            @Umbraco.Field("pageTitle", altFieldAlias:"pageName", insertBefore:"<h1>", insertAfter:"</h1>")
-            @Umbraco.Field("subtitle", insertBefore:"<p>", insertAfter:"</p>")
-        </header>
-        <span class="image main"><img src="@mainImageUrl" alt="" /></span>
-        <p><strong>@Umbraco.Field("articleDate",formatAsDate: true)</strong></p>
-        @Umbraco.Field("mainContent")
+<div class="article-clean">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="intro">
+                    <h1 class="text-center">@Umbraco.Field("title", altFieldAlias: "pageName", insertBefore: "<h1>", insertAfter: "</h1>")</h1>
+                    <p class="text-center">
+                        <span class="date">@Umbraco.Field("articleDate", formatAsDate: true)</span>
+                    </p>
+                    <img class="img-responsive" src="@(mainImageUrl)?width=1920&height=1080&mode=crop&anchor=center">
+                </div>
+                <div class="text">
+                    @Html.GetGridHtml(Model.Content, "contentGrid", "CSUSKGrid")
+                </div>
+            </div>
+        </div>
     </div>
-</section>
-
+</div>

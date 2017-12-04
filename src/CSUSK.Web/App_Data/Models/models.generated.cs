@@ -19,14 +19,14 @@ using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "f751d1e47a9d13cd")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.5")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "8c72fdfb73caa2f9")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.3")]
 
 namespace Umbraco.Web.PublishedContentModels
 {
 	/// <summary>Home</summary>
 	[PublishedContentModel("home")]
-	public partial class Home : PublishedContentModel, IFooterContentControls, IMetaDataControls, INavigationControls, IUmbracoUrlAliasControls
+	public partial class Home : PublishedContentModel, ICarouselControls, IFooterContentControls, ILatestArticlesControls, IMetaDataControls, INavigationControls, IUmbracoUrlAliasControls
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "home";
@@ -47,6 +47,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Home, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Main Carousel: Add the items for the carousel
+		///</summary>
+		[ImplementPropertyType("mainCarousel")]
+		public IEnumerable<IPublishedContent> MainCarousel
+		{
+			get { return Umbraco.Web.PublishedContentModels.CarouselControls.GetMainCarousel(this); }
 		}
 
 		///<summary>
@@ -74,6 +83,24 @@ namespace Umbraco.Web.PublishedContentModels
 		public string FooterTitle
 		{
 			get { return Umbraco.Web.PublishedContentModels.FooterContentControls.GetFooterTitle(this); }
+		}
+
+		///<summary>
+		/// Latest Articles Subtitle: Enter the subtitle for the latest articles
+		///</summary>
+		[ImplementPropertyType("latestArticlesSubtitle")]
+		public string LatestArticlesSubtitle
+		{
+			get { return Umbraco.Web.PublishedContentModels.LatestArticlesControls.GetLatestArticlesSubtitle(this); }
+		}
+
+		///<summary>
+		/// Latest Articles Title: Enter a title for the latest articles
+		///</summary>
+		[ImplementPropertyType("latestArticlesTitle")]
+		public string LatestArticlesTitle
+		{
+			get { return Umbraco.Web.PublishedContentModels.LatestArticlesControls.GetLatestArticlesTitle(this); }
 		}
 
 		///<summary>
@@ -110,6 +137,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public bool DisableDropdown
 		{
 			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetDisableDropdown(this); }
+		}
+
+		///<summary>
+		/// Text Only In Navigation: Tick this box if you want this item to be just text only in the navigation menu.
+		///</summary>
+		[ImplementPropertyType("textOnlyInNavigation")]
+		public bool TextOnlyInNavigation
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetTextOnlyInNavigation(this); }
 		}
 
 		///<summary>
@@ -220,6 +256,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Text Only In Navigation: Tick this box if you want this item to be just text only in the navigation menu.
+		///</summary>
+		[ImplementPropertyType("textOnlyInNavigation")]
+		public bool TextOnlyInNavigation
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetTextOnlyInNavigation(this); }
+		}
+
+		///<summary>
 		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
 		///</summary>
 		[ImplementPropertyType("umbracoNaviHide")]
@@ -297,6 +342,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public bool DisableDropdown
 		{
 			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetDisableDropdown(this); }
+		}
+
+		///<summary>
+		/// Text Only In Navigation: Tick this box if you want this item to be just text only in the navigation menu.
+		///</summary>
+		[ImplementPropertyType("textOnlyInNavigation")]
+		public bool TextOnlyInNavigation
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetTextOnlyInNavigation(this); }
 		}
 
 		///<summary>
@@ -493,6 +547,9 @@ namespace Umbraco.Web.PublishedContentModels
 		/// <summary>Disable Dropdown</summary>
 		bool DisableDropdown { get; }
 
+		/// <summary>Text Only In Navigation</summary>
+		bool TextOnlyInNavigation { get; }
+
 		/// <summary>Umbraco Navi Hide</summary>
 		bool UmbracoNaviHide { get; }
 	}
@@ -533,6 +590,18 @@ namespace Umbraco.Web.PublishedContentModels
 
 		/// <summary>Static getter for Disable Dropdown</summary>
 		public static bool GetDisableDropdown(INavigationControls that) { return that.GetPropertyValue<bool>("disableDropdown"); }
+
+		///<summary>
+		/// Text Only In Navigation: Tick this box if you want this item to be just text only in the navigation menu.
+		///</summary>
+		[ImplementPropertyType("textOnlyInNavigation")]
+		public bool TextOnlyInNavigation
+		{
+			get { return GetTextOnlyInNavigation(this); }
+		}
+
+		/// <summary>Static getter for Text Only In Navigation</summary>
+		public static bool GetTextOnlyInNavigation(INavigationControls that) { return that.GetPropertyValue<bool>("textOnlyInNavigation"); }
 
 		///<summary>
 		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
@@ -685,6 +754,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Text Only In Navigation: Tick this box if you want this item to be just text only in the navigation menu.
+		///</summary>
+		[ImplementPropertyType("textOnlyInNavigation")]
+		public bool TextOnlyInNavigation
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetTextOnlyInNavigation(this); }
+		}
+
+		///<summary>
 		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
 		///</summary>
 		[ImplementPropertyType("umbracoNaviHide")]
@@ -705,7 +783,7 @@ namespace Umbraco.Web.PublishedContentModels
 
 	/// <summary>Article</summary>
 	[PublishedContentModel("article")]
-	public partial class Article : PublishedContentModel, IContentControls, IMetaDataControls, INavigationControls, IUmbracoUrlAliasControls
+	public partial class Article : PublishedContentModel, IArticleControls, IContentControls, IMetaDataControls, INavigationControls, IUmbracoUrlAliasControls
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "article";
@@ -726,6 +804,24 @@ namespace Umbraco.Web.PublishedContentModels
 		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Article, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Article Date: Choose a date for this article
+		///</summary>
+		[ImplementPropertyType("articleDate")]
+		public DateTime ArticleDate
+		{
+			get { return Umbraco.Web.PublishedContentModels.ArticleControls.GetArticleDate(this); }
+		}
+
+		///<summary>
+		/// Author Name: Enter a name for the author
+		///</summary>
+		[ImplementPropertyType("authorName")]
+		public string AuthorName
+		{
+			get { return Umbraco.Web.PublishedContentModels.ArticleControls.GetAuthorName(this); }
 		}
 
 		///<summary>
@@ -792,6 +888,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Text Only In Navigation: Tick this box if you want this item to be just text only in the navigation menu.
+		///</summary>
+		[ImplementPropertyType("textOnlyInNavigation")]
+		public bool TextOnlyInNavigation
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetTextOnlyInNavigation(this); }
+		}
+
+		///<summary>
 		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
 		///</summary>
 		[ImplementPropertyType("umbracoNaviHide")]
@@ -842,6 +947,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public bool DisableDropdown
 		{
 			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetDisableDropdown(this); }
+		}
+
+		///<summary>
+		/// Text Only In Navigation: Tick this box if you want this item to be just text only in the navigation menu.
+		///</summary>
+		[ImplementPropertyType("textOnlyInNavigation")]
+		public bool TextOnlyInNavigation
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetTextOnlyInNavigation(this); }
 		}
 
 		///<summary>
@@ -934,6 +1048,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Text Only In Navigation: Tick this box if you want this item to be just text only in the navigation menu.
+		///</summary>
+		[ImplementPropertyType("textOnlyInNavigation")]
+		public bool TextOnlyInNavigation
+		{
+			get { return Umbraco.Web.PublishedContentModels.NavigationControls.GetTextOnlyInNavigation(this); }
+		}
+
+		///<summary>
 		/// Umbraco Navi Hide: Tick this box if you want to hide it from the site.
 		///</summary>
 		[ImplementPropertyType("umbracoNaviHide")]
@@ -1017,6 +1140,420 @@ namespace Umbraco.Web.PublishedContentModels
 
 		/// <summary>Static getter for Title</summary>
 		public static string GetTitle(IContentControls that) { return that.GetPropertyValue<string>("title"); }
+	}
+
+	/// <summary>Carousel Slide</summary>
+	[PublishedContentModel("carouselSlide")]
+	public partial class CarouselSlide : PublishedContentModel, ISlideImageControls, ISlideLinkControls, ISlideSubtitleControls, ISlideTitleControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "carouselSlide";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public CarouselSlide(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<CarouselSlide, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Slide Image: Add an image for the slide
+		///</summary>
+		[ImplementPropertyType("slideImage")]
+		public IPublishedContent SlideImage
+		{
+			get { return Umbraco.Web.PublishedContentModels.SlideImageControls.GetSlideImage(this); }
+		}
+
+		///<summary>
+		/// Slide Link: Add a link for this slide to link to
+		///</summary>
+		[ImplementPropertyType("slideLink")]
+		public Umbraco.Web.Models.RelatedLinks SlideLink
+		{
+			get { return Umbraco.Web.PublishedContentModels.SlideLinkControls.GetSlideLink(this); }
+		}
+
+		///<summary>
+		/// Slide Subtitle: Enter the subtitle for this slide
+		///</summary>
+		[ImplementPropertyType("slideSubtitle")]
+		public string SlideSubtitle
+		{
+			get { return Umbraco.Web.PublishedContentModels.SlideSubtitleControls.GetSlideSubtitle(this); }
+		}
+
+		///<summary>
+		/// Slide Title: Enter the title for this slide
+		///</summary>
+		[ImplementPropertyType("slideTitle")]
+		public string SlideTitle
+		{
+			get { return Umbraco.Web.PublishedContentModels.SlideTitleControls.GetSlideTitle(this); }
+		}
+	}
+
+	// Mixin content Type 1097 with alias "carouselControls"
+	/// <summary>Carousel Controls</summary>
+	public partial interface ICarouselControls : IPublishedContent
+	{
+		/// <summary>Main Carousel</summary>
+		IEnumerable<IPublishedContent> MainCarousel { get; }
+	}
+
+	/// <summary>Carousel Controls</summary>
+	[PublishedContentModel("carouselControls")]
+	public partial class CarouselControls : PublishedContentModel, ICarouselControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "carouselControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public CarouselControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<CarouselControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Main Carousel: Add the items for the carousel
+		///</summary>
+		[ImplementPropertyType("mainCarousel")]
+		public IEnumerable<IPublishedContent> MainCarousel
+		{
+			get { return GetMainCarousel(this); }
+		}
+
+		/// <summary>Static getter for Main Carousel</summary>
+		public static IEnumerable<IPublishedContent> GetMainCarousel(ICarouselControls that) { return that.GetPropertyValue<IEnumerable<IPublishedContent>>("mainCarousel"); }
+	}
+
+	// Mixin content Type 1100 with alias "slideTitleControls"
+	/// <summary>Slide Title Controls</summary>
+	public partial interface ISlideTitleControls : IPublishedContent
+	{
+		/// <summary>Slide Title</summary>
+		string SlideTitle { get; }
+	}
+
+	/// <summary>Slide Title Controls</summary>
+	[PublishedContentModel("slideTitleControls")]
+	public partial class SlideTitleControls : PublishedContentModel, ISlideTitleControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "slideTitleControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public SlideTitleControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<SlideTitleControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Slide Title: Enter the title for this slide
+		///</summary>
+		[ImplementPropertyType("slideTitle")]
+		public string SlideTitle
+		{
+			get { return GetSlideTitle(this); }
+		}
+
+		/// <summary>Static getter for Slide Title</summary>
+		public static string GetSlideTitle(ISlideTitleControls that) { return that.GetPropertyValue<string>("slideTitle"); }
+	}
+
+	// Mixin content Type 1101 with alias "slideSubtitleControls"
+	/// <summary>Slide Subtitle Controls</summary>
+	public partial interface ISlideSubtitleControls : IPublishedContent
+	{
+		/// <summary>Slide Subtitle</summary>
+		string SlideSubtitle { get; }
+	}
+
+	/// <summary>Slide Subtitle Controls</summary>
+	[PublishedContentModel("slideSubtitleControls")]
+	public partial class SlideSubtitleControls : PublishedContentModel, ISlideSubtitleControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "slideSubtitleControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public SlideSubtitleControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<SlideSubtitleControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Slide Subtitle: Enter the subtitle for this slide
+		///</summary>
+		[ImplementPropertyType("slideSubtitle")]
+		public string SlideSubtitle
+		{
+			get { return GetSlideSubtitle(this); }
+		}
+
+		/// <summary>Static getter for Slide Subtitle</summary>
+		public static string GetSlideSubtitle(ISlideSubtitleControls that) { return that.GetPropertyValue<string>("slideSubtitle"); }
+	}
+
+	// Mixin content Type 1102 with alias "slideImageControls"
+	/// <summary>Slide Image Controls</summary>
+	public partial interface ISlideImageControls : IPublishedContent
+	{
+		/// <summary>Slide Image</summary>
+		IPublishedContent SlideImage { get; }
+	}
+
+	/// <summary>Slide Image Controls</summary>
+	[PublishedContentModel("slideImageControls")]
+	public partial class SlideImageControls : PublishedContentModel, ISlideImageControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "slideImageControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public SlideImageControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<SlideImageControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Slide Image: Add an image for the slide
+		///</summary>
+		[ImplementPropertyType("slideImage")]
+		public IPublishedContent SlideImage
+		{
+			get { return GetSlideImage(this); }
+		}
+
+		/// <summary>Static getter for Slide Image</summary>
+		public static IPublishedContent GetSlideImage(ISlideImageControls that) { return that.GetPropertyValue<IPublishedContent>("slideImage"); }
+	}
+
+	// Mixin content Type 1103 with alias "slideLinkControls"
+	/// <summary>Slide Link Controls</summary>
+	public partial interface ISlideLinkControls : IPublishedContent
+	{
+		/// <summary>Slide Link</summary>
+		Umbraco.Web.Models.RelatedLinks SlideLink { get; }
+	}
+
+	/// <summary>Slide Link Controls</summary>
+	[PublishedContentModel("slideLinkControls")]
+	public partial class SlideLinkControls : PublishedContentModel, ISlideLinkControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "slideLinkControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public SlideLinkControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<SlideLinkControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Slide Link: Add a link for this slide to link to
+		///</summary>
+		[ImplementPropertyType("slideLink")]
+		public Umbraco.Web.Models.RelatedLinks SlideLink
+		{
+			get { return GetSlideLink(this); }
+		}
+
+		/// <summary>Static getter for Slide Link</summary>
+		public static Umbraco.Web.Models.RelatedLinks GetSlideLink(ISlideLinkControls that) { return that.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("slideLink"); }
+	}
+
+	// Mixin content Type 1105 with alias "latestArticlesControls"
+	/// <summary>Latest Articles Controls</summary>
+	public partial interface ILatestArticlesControls : IPublishedContent
+	{
+		/// <summary>Latest Articles Subtitle</summary>
+		string LatestArticlesSubtitle { get; }
+
+		/// <summary>Latest Articles Title</summary>
+		string LatestArticlesTitle { get; }
+	}
+
+	/// <summary>Latest Articles Controls</summary>
+	[PublishedContentModel("latestArticlesControls")]
+	public partial class LatestArticlesControls : PublishedContentModel, ILatestArticlesControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "latestArticlesControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public LatestArticlesControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<LatestArticlesControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Latest Articles Subtitle: Enter the subtitle for the latest articles
+		///</summary>
+		[ImplementPropertyType("latestArticlesSubtitle")]
+		public string LatestArticlesSubtitle
+		{
+			get { return GetLatestArticlesSubtitle(this); }
+		}
+
+		/// <summary>Static getter for Latest Articles Subtitle</summary>
+		public static string GetLatestArticlesSubtitle(ILatestArticlesControls that) { return that.GetPropertyValue<string>("latestArticlesSubtitle"); }
+
+		///<summary>
+		/// Latest Articles Title: Enter a title for the latest articles
+		///</summary>
+		[ImplementPropertyType("latestArticlesTitle")]
+		public string LatestArticlesTitle
+		{
+			get { return GetLatestArticlesTitle(this); }
+		}
+
+		/// <summary>Static getter for Latest Articles Title</summary>
+		public static string GetLatestArticlesTitle(ILatestArticlesControls that) { return that.GetPropertyValue<string>("latestArticlesTitle"); }
+	}
+
+	// Mixin content Type 1106 with alias "articleControls"
+	/// <summary>Article Controls</summary>
+	public partial interface IArticleControls : IPublishedContent
+	{
+		/// <summary>Article Date</summary>
+		DateTime ArticleDate { get; }
+
+		/// <summary>Author Name</summary>
+		string AuthorName { get; }
+	}
+
+	/// <summary>Article Controls</summary>
+	[PublishedContentModel("articleControls")]
+	public partial class ArticleControls : PublishedContentModel, IArticleControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "articleControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public ArticleControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ArticleControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Article Date: Choose a date for this article
+		///</summary>
+		[ImplementPropertyType("articleDate")]
+		public DateTime ArticleDate
+		{
+			get { return GetArticleDate(this); }
+		}
+
+		/// <summary>Static getter for Article Date</summary>
+		public static DateTime GetArticleDate(IArticleControls that) { return that.GetPropertyValue<DateTime>("articleDate"); }
+
+		///<summary>
+		/// Author Name: Enter a name for the author
+		///</summary>
+		[ImplementPropertyType("authorName")]
+		public string AuthorName
+		{
+			get { return GetAuthorName(this); }
+		}
+
+		/// <summary>Static getter for Author Name</summary>
+		public static string GetAuthorName(IArticleControls that) { return that.GetPropertyValue<string>("authorName"); }
 	}
 
 	/// <summary>Folder</summary>

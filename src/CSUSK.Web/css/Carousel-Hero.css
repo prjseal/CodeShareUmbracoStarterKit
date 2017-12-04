@@ -26,9 +26,19 @@ h1.hero-title, h2.hero-title, h3.hero-title {
 }
 
 p.hero-subtitle {
-  max-width:600px;
-  margin:25px auto;
-  padding:10px 15px;
-  color:#fff;
+    max-width: 600px;
+    margin: 25px auto;
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 26px;
 }
+
+div.carousel-hero p {
+    text-shadow: 0 0 10px #000000;
+}
+
+div.carousel-hero h1 {
+    text-shadow: 0 0 20px #000000;
+}
+
 

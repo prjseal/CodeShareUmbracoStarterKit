@@ -1,0 +1,40 @@
+﻿@inherits UmbracoViewPage
+
+@using Umbraco.Web.Models
+@using System.Collections.Generic;
+@using ImageProcessor.Web
+
+@{
+    IPublishedContent homePage = Umbraco.AssignedContentItem.AncestorOrSelf("home");
+    IPublishedContent articleList = homePage.Children.Where(x => x.DocumentTypeAlias == "articleList" && x.IsVisible()).FirstOrDefault();
+    IEnumerable<IPublishedContent> articles = articleList.Children.Where(x => x.IsVisible() && x.DocumentTypeAlias == "article").OrderByDescending(x => x.GetPropertyValue<DateTime>("articleDate"));
+    bool isHomePage = Umbraco.AssignedContentItem.Id == homePage.Id;
+    int itemsToShow = isHomePage ? 3 : 99;
+}
+
+<div class="article-list">
+    <div class="container">
+        <div class="intro">
+            <h2 class="text-center">@Umbraco.Field("latestArticlesTitle", recursive: true)</h2>
+            <p class="text-center">@Umbraco.Field("latestArticlesSubtitle", recursive: true)</p>
+        </div>
+        @if (articles.Any())
+        {
+            <div class="row articles">
+                @foreach (IPublishedContent item in articles.OrderByDescending(x => x.GetPropertyValue<DateTime>("articleDate")).Take(itemsToShow))
+                {
+                    string imageUrl = item.HasValue("mainImage") ? item.GetPropertyValue<IPublishedContent>("mainImage").Url : "/img/carousel.jpg";
+                    string title = item.HasValue("title") ? item.GetPropertyValue<string>("title") : item.Name;
+                    string description = item.GetPropertyValue<string>("metaDescription");
+
+                    <div class="col-md-4 col-sm-6 item">
+                        <a href="@item.Url"><img class="img-responsive" src="@(imageUrl)?width=720&height=455&mode=crop&anchor=center"></a>
+                        <h3 class="name"><a href="@item.Url">@title</a></h3>
+                        <p class="description">@description</p>
+                        <a href="@item.Url" class="action"><i class="glyphicon glyphicon-circle-arrow-right"></i></a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
