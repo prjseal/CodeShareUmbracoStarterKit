@@ -255,6 +255,7 @@
     <Content Include="css\Navigation-Clean1.css" />
     <Content Include="css\News-Cards.css" />
     <Content Include="css\styles.css" />
+    <Content Include="css\StylesDropdown.css" />
     <Content Include="img\carousel.jpg" />
     <Content Include="img\code.jpg" />
     <Content Include="img\navigation.jpg" />

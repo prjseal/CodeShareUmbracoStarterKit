@@ -2,6 +2,7 @@
 
 @using Umbraco.Web.Models
 
+<title>@Umbraco.Field("metaName", altFieldAlias: "pageName")</title>
 <meta name="Name" content="@Umbraco.Field("metaName", altFieldAlias: "pageName")" />
 <meta name="Description" content="@Umbraco.Field("metaDescription", altFieldAlias: "pageName")" />
 <meta name="Keywords" content="@(Umbraco.AssignedContentItem.HasValue("metaKeywords") ? string.Join(",", Umbraco.AssignedContentItem.GetPropertyValue<string[]>("metaKeywords")) : Umbraco.AssignedContentItem.Name)" />

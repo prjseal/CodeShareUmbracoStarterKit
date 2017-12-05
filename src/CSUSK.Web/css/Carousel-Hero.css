@@ -8,18 +8,6 @@ div.jumbotron.carousel-hero {
   margin-bottom:0;
 }
 
-div.jumbotron.hero-nature {
-  background-image:url('../../assets/img/hero-background-nature.jpg');
-}
-
-div.jumbotron.hero-photography {
-  background-image:url('../../assets/img/hero-background-photography.jpg');
-}
-
-div.jumbotron.hero-technology {
-  background-image:url('../../assets/img/hero-background-technology.jpg');
-}
-
 h1.hero-title, h2.hero-title, h3.hero-title {
   text-shadow:0 3px 3px rgba(0,0,0,0.4);
   color:#fff;
