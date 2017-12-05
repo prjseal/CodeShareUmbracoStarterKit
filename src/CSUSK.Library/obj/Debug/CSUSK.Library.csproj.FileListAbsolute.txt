@@ -104,4 +104,3 @@ D:\paul\Documents\GitHub\CodeShareUmbracoStarterKit\src\CSUSK.Library\bin\Debug\
 D:\paul\Documents\GitHub\CodeShareUmbracoStarterKit\src\CSUSK.Library\bin\Debug\UmbracoExamine.xml
 D:\paul\Documents\GitHub\CodeShareUmbracoStarterKit\src\CSUSK.Library\obj\Debug\CSUSK.Library.dll
 D:\paul\Documents\GitHub\CodeShareUmbracoStarterKit\src\CSUSK.Library\obj\Debug\CSUSK.Library.pdb
-D:\paul\Documents\GitHub\CodeShareUmbracoStarterKit\src\CSUSK.Library\obj\Debug\CSUSK.Library.csprojResolveAssemblyReference.cache

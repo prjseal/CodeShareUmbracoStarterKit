@@ -133,6 +133,7 @@
       <HintPath>..\packages\UmbracoCms.Core.7.7.6\lib\net45\SQLCE4Umbraco.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.7.6\lib\net45\System.Data.SqlServerCe.dll</HintPath>
@@ -206,8 +207,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateMediaHandler.cs" />
+    <Compile Include="PackageActions\CreateMediaHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SurfaceControllers\ContactSurfaceController.cs" />
+    <Compile Include="ViewModels\ContactViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -19,7 +19,7 @@ using Umbraco.Core.Services;
 using System.IO;
 using System.Web;
 
-namespace CSUSK.Web.PackageActions
+namespace CSUSK.Library.PackageActions
 {
     public class CreateMediaHandler : IPackageAction
     {

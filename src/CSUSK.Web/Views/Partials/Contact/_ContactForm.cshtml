@@ -1,6 +1,7 @@
 ﻿@inherits UmbracoViewPage<ContactViewModel>
 
-@using CSUSK.Web.ViewModels
+@using CSUSK.Library.ViewModels
+@using CSUSK.Library.SurfaceControllers
 
 <div id="form-outer">
     @using (Ajax.BeginForm("SubmitForm", "Contact", new AjaxOptions()

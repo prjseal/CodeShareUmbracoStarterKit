@@ -1,11 +1,11 @@
 ﻿using System.Web.Mvc;
 using Umbraco.Web.Mvc;
-using CSUSK.Web.ViewModels;
+using CSUSK.Library.ViewModels;
 using System.Net.Mail;
 using log4net;
 using System.Reflection;
 
-namespace CSUSK.Web.Controllers
+namespace CSUSK.Library.SurfaceControllers
 {
     public class ContactController : SurfaceController
     {
