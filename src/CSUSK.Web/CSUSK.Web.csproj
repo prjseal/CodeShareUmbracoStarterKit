@@ -255,6 +255,10 @@
     <Content Include="css\Navigation-Clean1.css" />
     <Content Include="css\News-Cards.css" />
     <Content Include="css\styles.css" />
+    <Content Include="img\carousel.jpg" />
+    <Content Include="img\code.jpg" />
+    <Content Include="img\navigation.jpg" />
+    <Content Include="img\party.jpg" />
     <Content Include="packages.config" />
     <Content Include="config\imageprocessor\security.config" />
     <Content Include="config\imageprocessor\processing.config" />
@@ -347,7 +351,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PackageActions\CreateMediaHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SurfaceControllers\ContactSurfaceController.cs" />
     <Compile Include="ViewModels\ContactViewModel.cs" />
@@ -356,8 +359,12 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="img\" />
+    <ProjectReference Include="..\CSUSK.Library\CSUSK.Library.csproj">
+      <Project>{3c38fc8a-185e-4a71-98e1-2d988a625cc6}</Project>
+      <Name>CSUSK.Library</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
