@@ -1,4 +1,11 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@using ClientDependency.Core.Mvc
+
+@{
+    Html.RequiresCss("/css/Article-Clean.css");
+}
+
 @{
 	Layout = "Master.cshtml";
 	string mainImageUrl = "";

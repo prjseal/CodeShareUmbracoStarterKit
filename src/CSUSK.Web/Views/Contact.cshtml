@@ -1,8 +1,15 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@using ClientDependency.Core.Mvc
+
 @{
 	Layout = "Master.cshtml";
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
+}
+
+@{
+    Html.RequiresCss("/css/Contact-Form-Clean.css");
 }
 
 <div class="contact-clean">

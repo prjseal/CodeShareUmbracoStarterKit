@@ -3,6 +3,8 @@
 	Layout = null;
 }
 
+@using ClientDependency.Core.Mvc
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,15 +14,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
-    <link rel="stylesheet" href="/css/Article-Clean.css">
-    <link rel="stylesheet" href="/css/Article-List.css">
-    <link rel="stylesheet" href="/css/Carousel-Hero.css">
-    <link rel="stylesheet" href="/css/Contact-Form-Clean.css">
-    <link rel="stylesheet" href="/css/Footer-Basic.css">
-    <link rel="stylesheet" href="/css/Navigation-Clean1.css">
-    <link rel="stylesheet" href="/css/News-Cards.css">
-    <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    @{
+        Html.RequiresCss("/css/Footer-Basic.css");
+        Html.RequiresCss("/css/Navigation-Clean1.css");
+        Html.RequiresCss("/css/News-Cards.css");
+        Html.RequiresCss("/css/styles.css");
+    }
+
+    @Html.RenderCssHere()
+
 </head>
 <body>
     <div style="margin-top:70px;"></div>

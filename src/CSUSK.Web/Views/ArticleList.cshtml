@@ -2,37 +2,14 @@
 
 @using Umbraco.Web.Models
 @using System.Collections.Generic;
+@using ClientDependency.Core.Mvc
+
+@{
+    Html.RequiresCss("/css/Article-List.css");
+}
 
 @{
 	Layout = "Master.cshtml";
-    IPublishedContent homePage = Model.Content.AncestorOrSelf("home");
-    IPublishedContent articleList = homePage.Children.Where(x => x.DocumentTypeAlias == "articleList" && x.IsVisible()).FirstOrDefault();
-    IEnumerable<IPublishedContent> articles = articleList.Children.Where(x => x.IsVisible() && x.DocumentTypeAlias == "article").OrderByDescending(x => x.GetPropertyValue<DateTime>("articleDate"));
 }
 
-<div class="article-list">
-    <div class="container">
-        <div class="intro">
-            <h2 class="text-center">@Umbraco.Field("latestArticlesTitle", recursive: true)</h2>
-            <p class="text-center">@Umbraco.Field("latestArticlesSubtitle", recursive: true)</p>
-        </div>
-        @if(articles.Any())
-        {
-            <div class="row articles">
-                @foreach(IPublishedContent item in articles)
-                {
-                    string imageUrl = item.GetPropertyValue<IPublishedContent>("mainImage").Url;
-                    string title = item.HasValue("title") ? item.GetPropertyValue<string>("title") : item.Name;
-                    string description = item.GetPropertyValue<string>("metaDescription");
-
-                    <div class="col-md-4 col-sm-6 item">
-                        <a href="#"><img class="img-responsive" src="@imageUrl"></a>
-                        <h3 class="name">@title</h3>
-                        <p class="description">@description</p>
-                        <a href="@item.Url" class="action"><i class="glyphicon glyphicon-circle-arrow-right"></i></a>
-                    </div>
-                }
-            </div>
-        }
-    </div>
-</div>
+@{ Html.RenderPartial("Partials/Content/_LatestArticles"); }

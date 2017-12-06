@@ -1,6 +1,13 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 
 @using Newtonsoft.Json.Linq
+@using ClientDependency.Core.Mvc
+
+@*Home Styles*@
+@{
+    Html.RequiresCss("/css/Article-List.css");
+    Html.RequiresCss("/css/Carousel-Hero.css");
+}
 
 @{
     Layout = "Master.cshtml";
