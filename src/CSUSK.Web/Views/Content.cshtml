@@ -4,30 +4,7 @@
 
 @{
 	Layout = "Master.cshtml";
-
-	string mainImageUrl = "";
-	if(Model.Content.HasValue("mainImage"))
-	{
-	    mainImageUrl = Model.Content.GetPropertyValue<IPublishedContent>("mainImage").Url;
-	}
+    Html.RequiresCss("/css/Article-Clean.css");
 }
 
-<div class="article-clean">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="intro">
-                    <h1 class="text-center">@Umbraco.Field("title", altFieldAlias: "pageName", insertBefore: "<h1>", insertAfter: "</h1>")</h1>
-@*                    <p class="text-center">
-                        <span class="date">@Umbraco.Field("articleDate", formatAsDate: true)</span>
-                    </p>*@
-                    <img class="img-responsive" src="@(mainImageUrl)?width=1920&height=1080&mode=crop&anchor=center">
-                </div>
-                <div class="text">
-                    @Html.GetGridHtml(Model.Content, "contentGrid", "CSUSKGrid")
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+@{ Html.RenderPartial("Content/_ArticleContent"); }

@@ -317,6 +317,7 @@
     <Content Include="Views\ArticleList.cshtml" />
     <Content Include="Views\Partials\Content\_LatestArticles.cshtml" />
     <Content Include="Views\Partials\Grid\CSUSKGrid.cshtml" />
+    <Content Include="Views\Partials\Content\_ArticleContent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
