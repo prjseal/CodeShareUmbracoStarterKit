@@ -2,9 +2,9 @@
 
 The starter kit you have been waiting for is finally here.
 
-[Demo site here] (http://codesharestarterkit.azurewebsites.net)
+[Demo site here](http://codesharestarterkit.azurewebsites.net)
 
-[Download the package on Our Umbraco here] (https://our.umbraco.org/projects/starter-kits/codeshare-starter-kit/)
+[Download the package on Our Umbraco here](https://our.umbraco.org/projects/starter-kits/codeshare-starter-kit/)
 
 ## What is included?
 In this starter kit you will see examples of how to do certain things in Umbraco such as:
