@@ -72,11 +72,13 @@
 
 @helper RenderPageLink(IPublishedContent item)
 {
+    bool isActive = Umbraco.AssignedContentItem.Id == item.Id;
+
     if (!item.GetPropertyValue<bool>("disableDropdown") && item.Children != null && item.Children.Where(x => x.IsVisible()).Any())
     {
         IEnumerable<IPublishedContent> childItems = item.Children.Where(x => x.IsVisible());
         bool textOnly = item.GetPropertyValue<bool>("textOnlyInNavigation");
-        <li class="dropdown">
+        <li class="dropdown @(isActive ? "active" : null)">
             <a class="dropdown-toggle @(textOnly ? "textonly" : null)" data-toggle="dropdown" aria-expanded="false" href="@item.Url">@item.Name <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
                 @RenderChildren(childItems)
@@ -85,7 +87,7 @@
     }
     else
     {
-        <li role="presentation">
+        <li role="presentation" class="@(isActive ? "active" : null)">
             <a href="@item.Url">@item.Name</a>
         </li>
     }

@@ -81,3 +81,13 @@
   max-width:100%;
 }
 
+div.article-clean {
+    background: #f1f1f1;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+div.article-clean .container {
+    background: #ffffff;
+    padding-bottom: 20px;
+}
