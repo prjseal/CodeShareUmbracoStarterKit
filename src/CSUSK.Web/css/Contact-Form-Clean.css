@@ -103,3 +103,7 @@
   color:#fff;
 }
 
+.contact-clean form span.field-validation-error {
+    color: red;
+    margin-top: 10px;
+}
