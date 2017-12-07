@@ -17,10 +17,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     @{
+        //styles
         Html.RequiresCss("/css/Footer-Basic.css");
         Html.RequiresCss("/css/Navigation-Clean1.css");
         Html.RequiresCss("/css/News-Cards.css");
         Html.RequiresCss("/css/styles.css");
+
+        //scripts
+        Html.RequiresJs("/scripts/navigationMenu.js");
     }
 
     @Html.RenderCssHere()
@@ -36,8 +40,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="/scripts/navigationMenu.js"></script>
     @Html.RenderJsHere()
-    @RenderSection("ScriptsBottom", false)
 </body>
 </html>

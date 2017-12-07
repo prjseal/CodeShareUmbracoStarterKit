@@ -3,17 +3,12 @@
 @using Newtonsoft.Json.Linq
 @using ClientDependency.Core.Mvc
 
-@*Home Styles*@
-@{
-    Html.RequiresCss("/css/Article-List.css");
-    Html.RequiresCss("/css/Carousel-Hero.css");
-}
-
 @{
     Layout = "Master.cshtml";
+    Html.RequiresCss("/css/Article-List.css");
+    Html.RequiresCss("/css/Carousel-Hero.css");
 }
 
 @{ Html.RenderPartial("Partials/Content/_MainCarousel"); }
 
 @{ Html.RenderPartial("Partials/Content/_LatestArticles"); }
-

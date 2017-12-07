@@ -5,11 +5,8 @@
 @using ClientDependency.Core.Mvc
 
 @{
+    Layout = "Master.cshtml";
     Html.RequiresCss("/css/Article-List.css");
-}
-
-@{
-	Layout = "Master.cshtml";
 }
 
 @{ Html.RenderPartial("Partials/Content/_LatestArticles"); }
