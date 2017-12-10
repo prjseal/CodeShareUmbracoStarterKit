@@ -1,23 +1,16 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Xml;
-using ClientDependency.Core;
-using Newtonsoft.Json.Linq;
 using umbraco.interfaces;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
-
-using umbraco.BusinessLogic;
-using umbraco.cms.businesslogic.packager.standardPackageActions;
 using Umbraco.Core.Models;
-using Umbraco.Web;
 using Umbraco.Core.Services;
-using System.IO;
-using System.Web;
+using Umbraco.Web;
 
 namespace CSUSK.Library.PackageActions
 {
