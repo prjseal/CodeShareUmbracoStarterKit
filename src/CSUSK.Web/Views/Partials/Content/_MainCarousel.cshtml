@@ -13,7 +13,7 @@
         <div class="carousel-inner" role="listbox">
             @{
                 int slideCount = 0;
-                foreach (IPublishedContent slide in carousel)
+                foreach (IPublishedContent slide in carousel.Where(x => x.IsVisible()))
                 {
                     string title = slide.GetPropertyValue<string>("slideTitle");
                     string subtitle = slide.HasValue("slideSubtitle") ? slide.GetPropertyValue<string>("slideSubtitle") : "";

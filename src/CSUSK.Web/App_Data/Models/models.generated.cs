@@ -19,8 +19,8 @@ using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "8c72fdfb73caa2f9")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "4c653a22f84b8bff")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.9")]
 
 namespace Umbraco.Web.PublishedContentModels
 {
@@ -1144,7 +1144,7 @@ namespace Umbraco.Web.PublishedContentModels
 
 	/// <summary>Carousel Slide</summary>
 	[PublishedContentModel("carouselSlide")]
-	public partial class CarouselSlide : PublishedContentModel, ISlideImageControls, ISlideLinkControls, ISlideSubtitleControls, ISlideTitleControls
+	public partial class CarouselSlide : PublishedContentModel, IDisableControls, ISlideImageControls, ISlideLinkControls, ISlideSubtitleControls, ISlideTitleControls
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "carouselSlide";
@@ -1165,6 +1165,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<CarouselSlide, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Disabled: Tick this box if you want to disable/hide this item
+		///</summary>
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide
+		{
+			get { return Umbraco.Web.PublishedContentModels.DisableControls.GetUmbracoNaviHide(this); }
 		}
 
 		///<summary>
@@ -1554,6 +1563,52 @@ namespace Umbraco.Web.PublishedContentModels
 
 		/// <summary>Static getter for Author Name</summary>
 		public static string GetAuthorName(IArticleControls that) { return that.GetPropertyValue<string>("authorName"); }
+	}
+
+	// Mixin content Type 1136 with alias "disableControls"
+	/// <summary>Disable Controls</summary>
+	public partial interface IDisableControls : IPublishedContent
+	{
+		/// <summary>Disabled</summary>
+		bool UmbracoNaviHide { get; }
+	}
+
+	/// <summary>Disable Controls</summary>
+	[PublishedContentModel("disableControls")]
+	public partial class DisableControls : PublishedContentModel, IDisableControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "disableControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public DisableControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<DisableControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Disabled: Tick this box if you want to disable/hide this item
+		///</summary>
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide
+		{
+			get { return GetUmbracoNaviHide(this); }
+		}
+
+		/// <summary>Static getter for Disabled</summary>
+		public static bool GetUmbracoNaviHide(IDisableControls that) { return that.GetPropertyValue<bool>("umbracoNaviHide"); }
 	}
 
 	/// <summary>Folder</summary>

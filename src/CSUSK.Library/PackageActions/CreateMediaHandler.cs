@@ -62,6 +62,7 @@ namespace CSUSK.Library.PackageActions
                 carouselObject[0][SLIDE_IMAGE_ALIAS] = codeImage.GetUdi().ToString();
                 carouselObject[1][SLIDE_IMAGE_ALIAS] = navigationImage.GetUdi().ToString();
                 carouselObject[2][SLIDE_IMAGE_ALIAS] = carouselImage.GetUdi().ToString();
+                carouselObject[3][SLIDE_IMAGE_ALIAS] = partyImage.GetUdi().ToString();
 
                 homePage.SetValue("mainCarousel", carouselObject.ToString());
                 _contentService.SaveAndPublishWithStatus(homePage);
