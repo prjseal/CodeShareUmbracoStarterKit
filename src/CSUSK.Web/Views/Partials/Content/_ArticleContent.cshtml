@@ -16,7 +16,10 @@
                             <span class="date">@Umbraco.Field("articleDate", formatAsDate: true)</span>
                         </p>
                     }
-                    <img class="img-responsive" src="@(mainImageUrl)">
+                    @if(!string.IsNullOrEmpty(mainImageUrl))
+                    {
+                        <img class="img-responsive" src="@(mainImageUrl)">
+                    }
                 </div>
                 <div class="text">
                     @Html.GetGridHtml(Umbraco.AssignedContentItem, "contentGrid", "CSUSKGrid")
