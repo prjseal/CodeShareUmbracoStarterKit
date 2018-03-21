@@ -78,8 +78,8 @@
     {
         IEnumerable<IPublishedContent> childItems = item.Children.Where(x => x.IsVisible());
         bool textOnly = item.GetPropertyValue<bool>("textOnlyInNavigation");
-        <li class="dropdown @(isActive ? "active" : null)">
-            <a class="dropdown-toggle @(textOnly ? "textonly" : null)" data-toggle="dropdown" aria-expanded="false" href="@item.Url">@item.Name <span class="caret"></span></a>
+        <li class="dropdown">
+            <a class="dropdown-toggle @(textOnly ? "textonly" : null) @(isActive ? "active" : null)" data-toggle="dropdown" aria-expanded="false" href="@item.Url">@item.Name <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
                 @RenderChildren(childItems)
             </ul>
